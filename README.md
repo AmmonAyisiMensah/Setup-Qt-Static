@@ -1,4 +1,4 @@
-# Qt 6.8.2 Static Build Script
+# Qt Static Build Script
 
 This repository provides a Bash script to **statically build Qt 6.5.4** from source on Linux, but other version may also be used supported.  
 The script automates the installation of dependencies, cloning the Qt source code, configuring, building, and installing both **Release** and **Debug** versions.
