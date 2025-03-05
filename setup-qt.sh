@@ -4,47 +4,65 @@
 #                  ONLY MAKE CHANGES TO THE QT_VERSION and QT_DEV_DIR VARIABLE !                   #
 ####################################################################################################
 
-
-
-# Change this varable to the right release tag, see here: https://github.com/qt/qt5/tags
-QT_VERSION=6.5.4-lts-lgpl
+# Change this variable to the right release tag, see here: https://github.com/qt/qt5/tags
+QT_VERSION=6.5.5-lts-lgpl
 
 # Change this variable to the right output location for the sources and builds
-QT_DEV_DIR=$HOME/dev
-
-
+QT_DEV_DIR=$HOME/dev/Qt
 
 ####################################################################################################
-
-
 
 # Qt label for the directory and messages
 QT_MAJOR_VERSION=$(echo $QT_VERSION | cut -d. -f1)
 QT_MINOR_VERSION=$(echo $QT_VERSION | cut -d. -f2)
-QT_UPDATE_VERSION=$( echo $(echo $QT_VERSION | cut -d. -f3) | cut -d- -f1)
+QT_UPDATE_VERSION=$(echo $(echo $QT_VERSION | cut -d. -f3) | cut -d- -f1)
 QT_LABEL=$QT_MAJOR_VERSION.$QT_MINOR_VERSION.$QT_UPDATE_VERSION
-echo $QT_LABEL
 
 # Directories for the source and builds
 QT_SOURCE_DIR=$QT_DEV_DIR/qt-$QT_LABEL-sources
 QT_BUILD_DIR_RELEASE=$QT_DEV_DIR/qt-$QT_LABEL-static-release
 QT_BUILD_DIR_DEBUG=$QT_DEV_DIR/qt-$QT_LABEL-static-debug
 
-
-
-
 echo "+------------------------------------------------------------------------------+"
 echo "|                         Install Qt Requirements                              |"
 echo "+------------------------------------------------------------------------------+"
+#sudo add-apt-repository ppa:open62541-team/ppa
 sudo apt update
-sudo apt install -y ninja-build cmake build-essential git \
-    libfontconfig1-dev libfreetype-dev libx11-dev libx11-xcb-dev \
-    libxcb-cursor-dev libxcb-glx0-dev libxcb-icccm4-dev libxcb-image0-dev \
-    libxcb-keysyms1-dev libxcb-randr0-dev libxcb-render-util0-dev \
-    libxcb-shape0-dev libxcb-shm0-dev libxcb-sync-dev libxcb-util-dev \
-    libxcb-xfixes0-dev libxcb-xinerama0-dev libxcb-xkb-dev libxcb1-dev \
-    libxext-dev libxfixes-dev libxi-dev libxkbcommon-dev libxkbcommon-x11-dev \
-    libxrender-dev
+sudo apt install -y \
+    ninja-build \
+    cmake \
+    build-essential \
+    git \
+    libfontconfig1-dev \
+    libfreetype-dev \
+    libx11-dev \
+    libx11-xcb-dev \
+    libxcb-cursor-dev \
+    libxcb-glx0-dev \
+    libxcb-icccm4-dev \
+    libxcb-image0-dev \
+    libxcb-keysyms1-dev \
+    libxcb-randr0-dev \
+    libxcb-render-util0-dev \
+    libxcb-shape0-dev \
+    libxcb-shm0-dev \
+    libxcb-sync-dev \
+    libxcb-util-dev \
+    libxcb-xfixes0-dev \
+    libxcb-xinerama0-dev \
+    libxcb-xkb-dev \
+    libxcb1-dev \
+    libxext-dev \
+    libxfixes-dev \
+    libxi-dev \
+    libxkbcommon-dev \
+    libxkbcommon-x11-dev \
+    libxrender-dev \
+    unixodbc-dev \
+    libmysqlclient-dev \
+    libpq-dev \
+    libopen62541-1-dev
+
 echo ""
 echo ""
 
@@ -86,7 +104,11 @@ $QT_SOURCE_DIR/configure \
     -opengl desktop \
     -skip qtwebengine \
     -platform linux-g++ \
-    -cmake-generator "Ninja" 
+    -cmake-generator "Ninja" \
+    -sql-odbc \
+    -sql-mysql \
+    -sql-psql \
+    
 
 echo ""
 echo ""
@@ -121,7 +143,10 @@ $QT_SOURCE_DIR/configure \
     -opengl desktop \
     -skip qtwebengine \
     -platform linux-g++ \
-    -cmake-generator "Ninja" 
+    -cmake-generator "Ninja" \
+    -sql-odbc \
+    -sql-mysql \
+    -sql-psql \
 
 echo ""
 echo ""
@@ -142,7 +167,7 @@ echo ""
 echo ""
 
 echo "+------------------------------------------------------------------------------+"
-echo "|                        Qt $QT_LABEL Static Build Completed!                      |"
+echo "|                        Qt $QT_LABEL Static Build Completed!                  |"
 echo "+------------------------------------------------------------------------------+"
 echo ""
 echo "   To use Release:"
@@ -152,4 +177,4 @@ echo ""
 echo "   To use Debug:"
 echo "       export PATH=$QT_BUILD_DIR_DEBUG/bin:\$PATH"
 echo "       export CMAKE_PREFIX_PATH=$QT_BUILD_DIR_DEBUG"
-
+echo ""
