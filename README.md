@@ -4,9 +4,9 @@ This repository provides a Bash script to **statically build Qt 6.5.4** from sou
 The script automates the installation of dependencies, cloning the Qt source code, configuring, building, and installing both **Release** and **Debug** versions.
 
 ## Features
-✅ **Static Build** – No external Qt dependencies required when building and deploying applications
-✅ **Configures & Builds Both Release and Debug Versions**  
-✅ **Uses Ninja for Faster Compilation**  
+- **Static Build** – No external Qt dependencies required when building and deploying applications
+- **Configures & Builds Both Release and Debug Versions**  
+- **Uses Ninja for Faster Compilation**  
 
 ## Prerequisites
 Ensure your system has the required development tools:  
@@ -23,7 +23,7 @@ git clone https://github.com/AmmonAyisiMensah/Setup-Qt-Static.git
 2. **Change the qt version and outpur directory(optional)**
 ```sh
 QT_VERSION=6.5.4-lts-lgpl
-QT_DEV_DIR==$HOME/dev
+QT_DEV_DIR==$HOME/dev/Qt
 ```
 
 3. **Run the script**
